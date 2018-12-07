@@ -1,0 +1,53 @@
+extends layout
+
+block head
+  script(src='javascripts/admin.js' crossorigin='anonymous')
+
+block content
+  div(class='pure-g')
+    div(id='errors' class='pure-u-1')
+
+  div(class='pure-g')
+    div(class='pure-u-2-5')
+
+      div
+        h4(style='border-bottom:1px solid #e5e5e5;') Game State
+        table(class='state-table')
+          tr
+            td Game Id:
+            td(id='game-id')
+          tr
+            td State:
+            td(id='game-state')
+          tr
+            td Queue:
+            td
+              ul(id='snake-list' class='snake-list')
+      
+      div
+        h4(style='border-bottom:1px solid #e5e5e5;') Game Control
+        form(class='pure-form')
+          fieldset(class='snake-group')
+            div(class='pure-control-group')
+              label(for='snake-name' class='snake-name-label' style='padding:0.5em;') Snake Name
+              input(id='snake-name' class='snake-name' type='text')
+            div(class='pure-control-group')
+              label(for='snake-url' class='snake-url-label' style='padding:0.5em;') Snake URL
+              input(id='snake-url' class='snake-url' type='text')
+              button(id='add-snake-btn' type='button' class='pure-button' style='margin:0.5em;') Add
+
+        //form(class='pure-form')
+          fieldset
+            legend Config
+            label(for='width' style='padding:0.5em;') Width
+            input(id='width' type='text' value='15' style='width:70px;')
+            label(for='height' style='padding:0.5em;') Height
+            input(id='height' type='text' value='15' style='width:70px')
+            label(for='food' style='padding:0.5em;') Food
+            input(id='food' type='text' value='10' style='width:70px')
+          button(id='start-game-btn' type='button' class='pure-button pure-button-primary') Start Game
+      
+      
+            
+    div(class='pure-u-3-5')
+      iframe(id="board" width='100%' height='600px' frameBorder='0')

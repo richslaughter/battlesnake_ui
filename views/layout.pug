@@ -1,0 +1,11 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='/stylesheets/pure-min.css')
+    script(src='javascripts/jquery-3.3.1.min.js' crossorigin='anonymous')
+    script(src='/socket.io/socket.io.js')
+    block head
+  body
+    block content
