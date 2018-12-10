@@ -82,9 +82,7 @@ class SnakeHandler {
         }
 
         if(this.state.snake_queue.length >= this.state.min_snakes){
-            this.game_start_time = Date.now() + 5000;
-            this.state.seconds_to_start = 5;
-            this.gotoState(STATE_COUNTDOWN);
+            this.startCountdown();
         }
     }
 
@@ -113,6 +111,12 @@ class SnakeHandler {
 
     handleStateComplete(){
         this.gotoState(STATE_WAITING);
+    }
+
+    startCountdown(){
+        this.game_start_time = Date.now() + 5000;
+        this.state.seconds_to_start = 5;
+        this.gotoState(STATE_COUNTDOWN);
     }
     
     startGame(){

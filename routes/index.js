@@ -37,6 +37,15 @@ router.post('/config', function(req, res, next) {
   }
 });
 
+router.post('/start', function(req, res, next) {
+  result = snakeHandler.startCountdown();
+  if(result instanceof Error){
+    res.status(400).send({error: result.message});
+  } else {
+    res.status(200).send();
+  }
+});
+
 router.delete('/queue', function(req, res, next) {
   result = snakeHandler.removeSnake(req.query.url);
   if(result instanceof Error){

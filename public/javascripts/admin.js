@@ -20,6 +20,7 @@ $(() => {
     } else {
       $("#game-state").html(data.game_state);
     }
+    $('#start-game-btn').prop('disabled', data.game_state != 'waiting');
   });
 
   $("#add-snake-btn").click(event => {
@@ -56,10 +57,12 @@ $(() => {
     console.log("start-game")
     $("#errors").text("")
     event.preventDefault()
-    const height = parseInt($("#height").val())
-    const width = parseInt($("#width").val())
-    const food = parseInt($("#food").val())
-    
-    //TODO: start the game...
+
+    $.post(`/start`, function() {
+      //
+    })
+    .fail(function(jqXHR, textStatus, errorThrown) {
+      alert(jqXHR.responseText);
+    })
   })
 })
