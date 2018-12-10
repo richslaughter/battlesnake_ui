@@ -1,5 +1,4 @@
 $(() => {
-  //var socket = io.connect('http://127.0.0.1:5000'); //FIXME
   var socket = io();
   socket.on('game_start', function (data) {
     console.log(data);
@@ -13,6 +12,9 @@ $(() => {
       $("#snake-list").append(`<li>${entry.name}</li>`)
     })
     $("#game-id").html(data.game_id);
+    $("#min-snakes").html(data.min_snakes);
+    $("#game-auto-start").html(`${data.auto_start}`);
+    $("#auto-start-chk").prop('checked', data.auto_start);
     if(data.game_state === 'countdown'){
       $("#game-state").html(`${data.game_state} (${data.seconds_to_start})`);
     } else {
@@ -34,6 +36,21 @@ $(() => {
       alert(jqXHR.responseText);
     })
   })
+
+  $("#apply-config").click(event => {
+    var autoStart = $('#auto-start-chk').is(':checked');
+
+    $.post(`/config?autostart=${autoStart}`, function() {
+      $('#apply-config').removeClass('pure-button-primary');
+    })
+    .fail(function(jqXHR, textStatus, errorThrown) {
+      alert(jqXHR.responseText);
+    })
+  });
+
+  $('.config').change(function(){
+    $('#apply-config').addClass('pure-button-primary');
+  });
 
   $("#start-game-btn").click(event => {
     console.log("start-game")

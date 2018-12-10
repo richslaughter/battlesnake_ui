@@ -20,21 +20,36 @@ block content
             td State:
             td(id='game-state')
           tr
+            td Auto-Start:
+            td(id='game-auto-start')
+          tr
+            td Min Snakes:
+            td(id='min-snakes')
+          tr
             td Queue:
             td
               ul(id='snake-list' class='snake-list')
       
       div
-        h4(style='border-bottom:1px solid #e5e5e5;') Game Control
+        h4(style='border-bottom:1px solid #e5e5e5;') Game Config
+        div(class='pure-control-group align-right')
+          button(type='button' class='pure-button' id='apply-config') Apply
+        form(class='pure-form pure-form-aligned')
+          fieldset
+            label(for='auto-start' class='snake-name-label' style='padding:0.5em;') Auto-Start
+            input(type='checkbox' class='config' id='auto-start-chk')
+            
+      
+      div
+        h4(style='border-bottom:1px solid #e5e5e5;') Add Snake
+        div(class='pure-control-group align-right')
+              button(id='add-snake-btn' type='button' class='pure-button' style='margin:0.5em;') Add
         form(class='pure-form')
           fieldset(class='snake-group')
             div(class='pure-control-group')
-              label(for='snake-name' class='snake-name-label' style='padding:0.5em;') Snake Name
-              input(id='snake-name' class='snake-name' type='text')
-            div(class='pure-control-group')
-              label(for='snake-url' class='snake-url-label' style='padding:0.5em;') Snake URL
-              input(id='snake-url' class='snake-url' type='text')
-              button(id='add-snake-btn' type='button' class='pure-button' style='margin:0.5em;') Add
+              input(id='snake-name' class='snake-name snake-input' type='text' placeholder='Name')
+              input(id='snake-url' class='snake-url snake-input' type='text' placeholder='URL')              
+            
 
         //form(class='pure-form')
           fieldset

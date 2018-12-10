@@ -16,14 +16,23 @@ class SnakeHandler {
             snake_queue: [],
             game_state: STATE_WAITING,
             game_id: null,
-            seconds_to_start: null
+            seconds_to_start: null,
+            auto_start: true
         }
         var self = this;
         socketApi.onNewClientCallback = function(){self.publishState();}
         console.debug('SnakeHandler initialised');
     }
 
+    setConfig(autoStart){
+        this.state.auto_start = autoStart === 'true' ? true : false;
+        this.publishState();
+    }
+
     addSnake(name, url){
+        if(name === "" || url === "")
+        return new Error ('Snake name and URL must be set');
+
         if(this.state.snake_queue.find(entry => entry.url === url) != null) {
             return new Error('url already in queue')
         } else {
@@ -68,6 +77,10 @@ class SnakeHandler {
     }
 
     handleStateWaiting(){
+        if(!this.state.auto_start){
+            return;
+        }
+
         if(this.state.snake_queue.length >= this.state.min_snakes){
             this.game_start_time = Date.now() + 5000;
             this.state.seconds_to_start = 5;
@@ -85,7 +98,6 @@ class SnakeHandler {
     }
 
     handleStateRunning(){
-        //var state_uri = `http://localhost:3005/games/${this.state.game_id}`;
         var state_uri = `${config.engineurl}/games/${this.state.game_id}`;
         var self = this;
         request.get({uri: state_uri, json: true},

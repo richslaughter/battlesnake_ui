@@ -18,3 +18,13 @@ body input {
   vertical-align: top;
   padding: 5px;
 }
+
+.align-right {
+  text-align: right;
+  float:right;
+}
+
+.snake-input {
+  width: 200px;
+  margin-right: 5px;
+}
